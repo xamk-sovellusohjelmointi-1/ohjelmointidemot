@@ -169,7 +169,7 @@ const App = () => {
 
 Tilamuuttuja määritetään komponentin ylätasolla ennen palautusta (return) antamalla sille nimi (tervehdys) ja päivitysfunktio (setTervehdys). Tilamuuttujan arvoksi sijoitetaan [useState()-funktio](https://react.dev/reference/react/useState "https://react.dev/reference/react/useState"), joka on ns. React Hook, jonka avulla tilamuuttujia luodaan.
 
-Yllä olevassa koodissa useState on tyypitetty TypeScriptin sääntöjen mukaan merkkijonoksi <Type> -määrityksellä (`useState<string>()`). Tilamuuttujiin on hyvä antaa jokin oletusarvo esimerkiksi tyhjänä arvona. Ilman arvoa tyyppi määräytyy Union-tyypiksi, esim. `string | undefined`, joka voi johtaa odottamattomiin ongelmiin koodissa, kun tilamuuttujan arvoon halutaan viitata ilman, että sitä on annettu.
+Yllä olevassa koodissa useState on tyypitetty TypeScriptin sääntöjen mukaan merkkijonoksi \<Type> -määrityksellä (`useState<string>()`). Tilamuuttujiin on hyvä antaa jokin oletusarvo esimerkiksi tyhjänä arvona. Ilman arvoa tyyppi määräytyy Union-tyypiksi, esim. `string | undefined`, joka voi johtaa odottamattomiin ongelmiin koodissa, kun tilamuuttujan arvoon halutaan viitata ilman, että sitä on annettu.
 
 Tilamuuttujaa voidaan päivittää kutsumalla sen set-funktiota. Tilamuuttujaa ei voi päivittää sijoittamalla siihen uutta arvoa kuten perinteisessä JavaScriptissä.
 
