@@ -1,0 +1,31 @@
+button, input {
+    border : solid 1px #aaa;
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    margin-bottom: 30px;
+}
+
+button {
+    width: 150px;
+    background-color: rgb(46, 80, 192);
+    color: white;
+}
+
+button:hover {
+    background-color: rgb(105, 135, 235);
+}
+
+button:active {
+    background-color: rgb(20, 47, 138);
+}
+
+input {
+    min-width: 400px;
+}
+
+.tervehdysteksti {
+    margin-top : 10px;
+    border : solid 1px #ccc;
+    padding: 20px;
+}
