@@ -183,7 +183,7 @@ const tervehdi(): void => {
 
 > [!NOTE]
 >
-> Huomaa, että tervehdi() -funktion TypeScript -tyypiksi annetaan void. Se tarkoittaa, että funktio ei palauta mitään arvoa. Jos funktiossa olisi palautus (return), funktion tyypiksi annettaisiin palautuksen tyyppi, esim. tervehdi(): string { return "Heippa maailma!"; }
+> Huomaa, että tervehdi() -funktion TypeScript -tyypiksi annetaan void. Se tarkoittaa, että funktio ei palauta mitään arvoa. Jos funktiossa olisi palautus (return), funktion tyypiksi annettaisiin palautuksen tyyppi, esim. `const tervehdi(): string => { return "Heippa maailma!"; }`
 >
 > React-komponentit ovat funktioita ja niissä oleva JSX-palautus tarkoittaa, että komponenttifunktiolla on jokin React-tyyppi. Kaikkia TypeScript-tyyppejä ei tarvitse määrittää eksplisiittisesti erikseen, vaan monet tyypit voidaan tulkita ohjelman kontekstista. Yleisimmissä Reactin ohjeissa komponenttien tyyppiä ei määritellä erikseen eikä sitä tehdä tässäkään.
 
