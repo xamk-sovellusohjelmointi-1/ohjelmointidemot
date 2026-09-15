@@ -333,7 +333,7 @@ const [nimi, setNimi] = useState<string>("");
 
 ### 4.6 Nimen tarkistus ja tervehdyksen muotoilu
 
-Tehdään vielä lopuksi `tervehdi()`-funktioon muutos, joka tarkistaa käyttäjän syötteen ja siitä muodostetun `nimi`-tilamuuttujan arvon ja muotoilee tervehdyksen henkilökohtaisesti käyttäjälle.
+Tehdään vielä lopuksi `tervehdi()`-funktioon muutos, joka tarkistaa käyttäjän syötteen ja siitä muodostetun `nimi`-tilamuuttujan arvon ja muotoilee tervehdyksen henkilökohtaisesti käyttäjälle. Nimi voidaan upottaa suoraan merkkijonoon template string -muotoilulla, jossa lainaus- tai heittomerkkien sijaa merkkijono ympäröidään backtick-merkeillä ja tilamuuttujan arvo upotetaan `${tilamuuttuja}` -tyylillä osaksi merkkijonoa.
 
 ```tsx
 const tervehdi = (): void => {
