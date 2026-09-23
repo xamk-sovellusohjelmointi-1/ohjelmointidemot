@@ -4,8 +4,8 @@ import './App.css';
 // Määritetään Tehtävä-objektin muoto
 interface Tehtava {
   id: string;
-  nimi : string;
-  tehty : boolean;
+  nimi: string;
+  tehty: boolean;
 }
 
 const App = () => {
@@ -18,24 +18,24 @@ const App = () => {
   ] = useState<Tehtava[]>([
     {
       id: crypto.randomUUID(),
-      nimi : "Käy kaupassa", 
-      tehty : false
+      nimi: "Käy kaupassa",
+      tehty: false
     },
     {
       id: crypto.randomUUID(),
-      nimi : "Siivoa", 
-      tehty : true
+      nimi: "Siivoa",
+      tehty: true
     },
     {
       id: crypto.randomUUID(),
-      nimi : "Ulkoiluta koiraa", 
-      tehty : false
+      nimi: "Ulkoiluta koiraa",
+      tehty: false
     }
   ]);
-  
-  const lisaaTehtava = (nimi : string): void => {
-    
-    let uusi : Tehtava = {
+
+  const lisaaTehtava = (nimi: string): void => {
+
+    let uusi: Tehtava = {
       id: crypto.randomUUID(),
       nimi,
       tehty: false
@@ -66,41 +66,41 @@ const App = () => {
 
       <h2>Tehtävälista</h2>
 
-      <input 
+      <input
         ref={uusiTehtava}
-        type="text" 
+        type="text"
         placeholder="Kirjoita tehtävä ja paina enter..."
-        onKeyDown={(e : any) => {
+        onKeyDown={(e) => {
           console.log(e.key);
           if (e.key === "Enter") {
-            lisaaTehtava(e.target.value);
-            e.target.value = null;
+            lisaaTehtava(e.currentTarget.value);
+            e.currentTarget.value = "";
           }
         }}
       />
 
-      <button onClick={ () => {
+      <button onClick={() => {
         if (uusiTehtava.current === null) {
           return;
         }
-          lisaaTehtava(uusiTehtava.current.value) 
-          uusiTehtava.current.value = "";   
+        lisaaTehtava(uusiTehtava.current.value)
+        uusiTehtava.current.value = "";
       }}>Lisää</button>
 
       <ul>
 
-      {tehtavat.map( (tehtava: Tehtava) => {
+        {tehtavat.map((tehtava: Tehtava) => {
 
-        return (
-                  <li key={tehtava.id} onClick={() => { merkitseTehdyksi(tehtava.id); }}>
-                    { (tehtava.tehty === true) 
-                      ? <del>{tehtava.nimi}</del> 
-                      : tehtava.nimi 
-                    }
-                  </li>
-        );
+          return (
+            <li key={tehtava.id} onClick={() => { merkitseTehdyksi(tehtava.id); }}>
+              {(tehtava.tehty === true)
+                ? <del>{tehtava.nimi}</del>
+                : tehtava.nimi
+              }
+            </li>
+          );
 
-      } )}
+        })}
 
       </ul>
 
