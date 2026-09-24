@@ -1,22 +1,22 @@
 # Demo 7: Lomakkeiden käsittely
 
-## 2. Sisällysluettelo
+## Sisällysluettelo
 
-- [3. Oppimistavoitteet](#3-oppimistavoitteet)
-- [4. Kloonaus ja käynnistys](#4-kloonaus-ja-käynnistys)
-- [5. Projektin rakenne alussa](#5-projektin-rakenne-alussa)
-- [6. Tutoriaali](#6-tutoriaali)
-  - [6.1 Kirjastojen asentaminen](#61-kirjastojen-asentaminen)
-  - [6.2 Käynnistystiedosto ja perustyylit](#62-käynnistystiedosto-ja-perustyylit)
-  - [6.3 Lomakkeen runko ja lähetys](#63-lomakkeen-runko-ja-lähetys)
-  - [6.4 Lomaketiedot ja useRef-hook](#64-lomaketiedot-ja-useref-hook)
-  - [6.5 Valintanapit ja valintaruutu](#65-valintanapit-ja-valintaruutu)
-  - [6.6 Validointi ja virheilmoitukset](#66-validointi-ja-virheilmoitukset)
-- [7. Projektin rakenne lopussa](#7-projektin-rakenne-lopussa)
-- [8. Yhteenveto](#8-yhteenveto)
-- [10. Jatka harjoittelua](#10-jatka-harjoittelua)
+- [1. Oppimistavoitteet](#1-oppimistavoitteet)
+- [2. Kloonaus ja käynnistys](#2-kloonaus-ja-käynnistys)
+- [3. Projektin rakenne alussa](#3-projektin-rakenne-alussa)
+- [4. Tutoriaali](#4-tutoriaali)
+  - [4.1 Kirjastojen asentaminen](#41-kirjastojen-asentaminen)
+  - [4.2 Käynnistystiedosto ja perustyylit](#42-käynnistystiedosto-ja-perustyylit)
+  - [4.3 Lomakkeen runko ja lähetys](#43-lomakkeen-runko-ja-lähetys)
+  - [4.4 Lomaketiedot ja useRef-hook](#44-lomaketiedot-ja-useref-hook)
+  - [4.5 Valintanapit ja valintaruutu](#45-valintanapit-ja-valintaruutu)
+  - [4.6 Validointi ja virheilmoitukset](#46-validointi-ja-virheilmoitukset)
+- [5. Projektin rakenne lopussa](#5-projektin-rakenne-lopussa)
+- [6. Yhteenveto](#6-yhteenveto)
+- [7. Jatka harjoittelua](#7-jatka-harjoittelua)
 
-## 3. Oppimistavoitteet
+## 1. Oppimistavoitteet
 
 Tässä demossa rakennetaan uudelleen demon 4 uutiskirjeen tilauslomake. Uudessa versiossa kentät ovat HTML-lomakkeen sisällä, lomakkeella on tekstikenttien lisäksi valintanapit, ja tiedot tarkistetaan lähetyksen yhteydessä. Puuttuvasta tai virheellisestä tiedosta näytetään virheilmoitus kyseisen kentän alla. Demo kattaa seuraavat tekniikat:
 
@@ -27,7 +27,7 @@ Tässä demossa rakennetaan uudelleen demon 4 uutiskirjeen tilauslomake. Uudessa
 - Valintanappiryhmä MUI:n `RadioGroup`-, `Radio`- ja `FormLabel`-komponenteilla
 - Lomakkeen validointi lähetyksen yhteydessä ja kenttäkohtaiset virheilmoitukset MUI:n `error`- ja `helperText`-propseilla sekä `FormHelperText`-komponentilla
 
-## 4. Kloonaus ja käynnistys
+## 2. Kloonaus ja käynnistys
 
 ```bash
 git clone https://github.com/xamk-sovellusohjelmointi-1/ohjelmointidemot.git
@@ -40,9 +40,9 @@ Sovellus käynnistyy osoitteeseen `http://localhost:3007`.
 
 Tutoriaali on kirjoitettu Vite 8:lla, Reactilla 19, TypeScriptillä 6.x ja MUI:n versiolla 9. TypeScriptistä on julkaistu tämän jälkeen pääversio 7, joten uudemman version asentaneella komennot, asetukset tai tyypitys saattavat poiketa tässä esitetystä.
 
-## 5. Projektin rakenne alussa
+## 3. Projektin rakenne alussa
 
-Demo aloitetaan uudesta, siivotusta Vite + React + TypeScript -projektipohjasta, jonka portiksi on asetettu `3007`. Projektin luominen ja ylimääräisten tiedostojen siivoaminen on kuvattu [demo 1:n README-tiedostossa](../demo-01/README.md#61-projektin-luominen).
+Demo aloitetaan uudesta, siivotusta Vite + React + TypeScript -projektipohjasta, jonka portiksi on asetettu `3007`. Projektin luominen ja ylimääräisten tiedostojen siivoaminen on kuvattu [demo 1:n README-tiedostossa](../demo-01/README.md#41-projektin-luominen).
 
 ```text
 demo-07/
@@ -63,9 +63,9 @@ demo-07/
 └── vite.config.ts
 ```
 
-## 6. Tutoriaali
+## 4. Tutoriaali
 
-### 6.1 Kirjastojen asentaminen
+### 4.1 Kirjastojen asentaminen
 
 Kirjastot asennetaan ensin, koska jokainen myöhempi vaihe käyttää niitä.
 
@@ -78,7 +78,7 @@ Paketit ovat samat kuin demossa 6, mutta ikonipakettia `@mui/icons-material` ja 
 
 Tiedosto `src/App.css` poistetaan, koska tässäkin demossa komponenttien ulkoasu määritellään MUI:n omilla keinoilla.
 
-### 6.2 Käynnistystiedosto ja perustyylit
+### 4.2 Käynnistystiedosto ja perustyylit
 
 Roboto-fontti otetaan käyttöön tiedostossa `src/main.tsx` samalla tavalla kuin demossa 6. Reititystä ei tarvita, joten `App`-komponenttia ei kääritä `BrowserRouter`-komponenttiin.
 
@@ -100,7 +100,7 @@ createRoot(document.getElementById('root')!).render(
 
 Tiedostosta poistetaan rivi `import './index.css'`, ja samalla poistetaan tiedosto `src/index.css`. Seuraavassa vaiheessa sovellukseen lisätään MUI:n `CssBaseline`-komponentti, jonka tyylit korvaavat kaikki `index.css`-tiedoston tyylit samoin kuin demossa 6.
 
-### 6.3 Lomakkeen runko ja lähetys
+### 4.3 Lomakkeen runko ja lähetys
 
 Lomakkeen kentät sijoitetaan HTML:n `<form>`-elementin sisään, joten ensin tehdään lomake ja sen lähetyspainike. Kentät lisätään valmiiseen runkoon seuraavissa vaiheissa.
 
@@ -160,7 +160,7 @@ Kun tiedosto on tallennettu, painikkeen painaminen näyttää ilmoituksen, eikä
 
 Aiheesta lisää: [Reactin dokumentaatio oletustoiminnon estämisestä](https://react.dev/learn/responding-to-events#preventing-default-behavior).
 
-### 6.4 Lomaketiedot ja useRef-hook
+### 4.4 Lomaketiedot ja useRef-hook
 
 Ennen kenttiä määritellään, missä muodossa lomakkeen tiedot tallennetaan. `Lomaketiedot`-rajapinnassa on yksi kenttä jokaista lomakkeen syötettä kohden. Myös valintanappien (`jakso`) ja valintaruudun (`kayttoehdot`) kentät määritellään jo nyt, koska tallennettavan olion alkuarvossa on oltava kaikki rajapinnan kentät.
 
@@ -257,11 +257,11 @@ Käsittelijä luo viitteeseen uuden olion, johon kopioidaan vanhan olion kentät
 
 Suora sijoitus `lomaketiedot.current[e.target.name] = e.target.value` ei kelpaa TypeScriptille. `e.target.name` voi olla mikä tahansa merkkijono, joten TypeScript ei voi tarkistaa, että se on jokin `Lomaketiedot`-rajapinnan kentistä. Uuden olion luominen levitysoperaattorilla hyväksytään.
 
-`console.log`-rivi on väliaikainen, ja se poistetaan vaiheessa 6.6. Kun kenttiin kirjoitetaan tekstiä ja lomake lähetetään, selaimen kehittäjätyökalujen konsoliin (F12) tulostuu olio, jossa on kenttiin kirjoitetut arvot.
+`console.log`-rivi on väliaikainen, ja se poistetaan vaiheessa 4.6. Kun kenttiin kirjoitetaan tekstiä ja lomake lähetetään, selaimen kehittäjätyökalujen konsoliin (F12) tulostuu olio, jossa on kenttiin kirjoitetut arvot.
 
 Aiheesta lisää: [Reactin dokumentaatio arvojen tallentamisesta viitteisiin](https://react.dev/learn/referencing-values-with-refs).
 
-### 6.5 Valintanapit ja valintaruutu
+### 4.5 Valintanapit ja valintaruutu
 
 Lomakkeeseen lisätään tilausjakson valinta ja käyttöehtojen hyväksyntä. Molemmat kootaan `FormControl`-komponentin sisään, koska seuraavassa vaiheessa samaan komponenttiin lisätään virheilmoitus.
 
@@ -382,7 +382,7 @@ Lähetyksen jälkeen konsoliin tulostuvassa oliossa näkyvät nyt myös valittu 
 
 Aiheesta lisää: [MUI:n Radio Group -dokumentaatio](https://mui.com/material-ui/react-radio-button/).
 
-### 6.6 Validointi ja virheilmoitukset
+### 4.6 Validointi ja virheilmoitukset
 
 Viimeisenä lomakkeeseen lisätään **validointi** (validation), eli tietojen tarkistaminen ennen tilauksen hyväksymistä. Validointi tehdään viimeisenä, koska se tarkistaa kaikkien aiemmissa vaiheissa lisättyjen kenttien arvot.
 
@@ -549,7 +549,7 @@ Virheet tarkistetaan vain lähetyksen yhteydessä. Kun virheellinen kenttä korj
 
 Aiheesta lisää: [MUI:n dokumentaatio tekstikentän validoinnista](https://mui.com/material-ui/react-text-field/#validation).
 
-## 7. Projektin rakenne lopussa
+## 5. Projektin rakenne lopussa
 
 ```text
 demo-07/
@@ -569,7 +569,7 @@ demo-07/
 └── vite.config.ts
 ```
 
-## 8. Yhteenveto
+## 6. Yhteenveto
 
 Tässä demossa käytiin läpi:
 
@@ -581,7 +581,7 @@ Tässä demossa käytiin läpi:
 
 ---
 
-## 10. Jatka harjoittelua
+## 7. Jatka harjoittelua
 
 - Näytä onnistumisilmoituksessa lähetetyt tiedot samalla tavalla kuin demossa 4. Tiedot löytyvät oliosta `lomaketiedot.current`, ja rivinvaihdot saa template literaliin merkinnällä `\n`.
 - Tarkista, että nimessä on vähintään kaksi sanaa. Merkkijonon `split(" ")`-metodi palauttaa taulukon sanoista, ja taulukon pituuden voi tarkistaa `length`-kentästä.

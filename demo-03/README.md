@@ -1,21 +1,21 @@
 # Demo 3: React-komponentit ja propsit
 
-## 2. Sisällysluettelo
+## Sisällysluettelo
 
-- [3. Oppimistavoitteet](#3-oppimistavoitteet)
-- [4. Kloonaus ja käynnistys](#4-kloonaus-ja-käynnistys)
-- [5. Projektin rakenne alussa](#5-projektin-rakenne-alussa)
-- [6. Tutoriaali](#6-tutoriaali)
-  - [6.1 Otsikko-komponentti ja propsit](#61-otsikko-komponentti-ja-propsit)
-  - [6.2 Sivu-komponentti ja tyylit](#62-sivu-komponentti-ja-tyylit)
-  - [6.3 Yhteenveto-komponentti ja tila](#63-yhteenveto-komponentti-ja-tila)
-  - [6.4 Laskurinappi-komponentti](#64-laskurinappi-komponentti)
-  - [6.5 Laskurinapit taulukosta](#65-laskurinapit-taulukosta)
-- [7. Projektin rakenne lopussa](#7-projektin-rakenne-lopussa)
-- [8. Yhteenveto](#8-yhteenveto)
-- [10. Jatka harjoittelua](#10-jatka-harjoittelua)
+- [1. Oppimistavoitteet](#1-oppimistavoitteet)
+- [2. Kloonaus ja käynnistys](#2-kloonaus-ja-käynnistys)
+- [3. Projektin rakenne alussa](#3-projektin-rakenne-alussa)
+- [4. Tutoriaali](#4-tutoriaali)
+  - [4.1 Otsikko-komponentti ja propsit](#41-otsikko-komponentti-ja-propsit)
+  - [4.2 Sivu-komponentti ja tyylit](#42-sivu-komponentti-ja-tyylit)
+  - [4.3 Yhteenveto-komponentti ja tila](#43-yhteenveto-komponentti-ja-tila)
+  - [4.4 Laskurinappi-komponentti](#44-laskurinappi-komponentti)
+  - [4.5 Laskurinapit taulukosta](#45-laskurinapit-taulukosta)
+- [5. Projektin rakenne lopussa](#5-projektin-rakenne-lopussa)
+- [6. Yhteenveto](#6-yhteenveto)
+- [7. Jatka harjoittelua](#7-jatka-harjoittelua)
 
-## 3. Oppimistavoitteet
+## 1. Oppimistavoitteet
 
 Tässä demossa sovellus jaetaan useaan omaan komponenttiin, ja komponenttien välillä välitetään tietoa propseilla. Esimerkkinä rakennetaan liikennelaskuri, jossa jokaisella kulkuneuvotyypillä on oma laskurinappinsa ja sivulla näytetään kaikkien laskettujen kulkuneuvojen yhteismäärä. Demo kattaa seuraavat tekniikat:
 
@@ -27,7 +27,7 @@ Tässä demossa sovellus jaetaan useaan omaan komponenttiin, ja komponenttien v�
 - Komponentin oma tila, joka on jokaisella komponentin ilmentymällä erillinen
 - CSS-luokkien käyttö `className`-attribuutilla
 
-## 4. Kloonaus ja käynnistys
+## 2. Kloonaus ja käynnistys
 
 ```bash
 git clone https://github.com/xamk-sovellusohjelmointi-1/ohjelmointidemot.git
@@ -40,9 +40,9 @@ Sovellus käynnistyy osoitteeseen `http://localhost:3003`.
 
 Tutoriaali on kirjoitettu Vite 8:lla, Reactilla 19 ja TypeScriptillä 6.x. TypeScriptistä on julkaistu tämän jälkeen pääversio 7, joten uudemman version asentaneella komennot, asetukset tai tyypitys saattavat poiketa tässä esitetystä.
 
-## 5. Projektin rakenne alussa
+## 3. Projektin rakenne alussa
 
-Demo aloitetaan uudesta, siivotusta Vite + React + TypeScript -projektipohjasta, jonka portiksi on asetettu `3003`. Projektin luominen ja ylimääräisten tiedostojen siivoaminen on kuvattu [demo 1:n README-tiedostossa](../demo-01/README.md#61-projektin-luominen).
+Demo aloitetaan uudesta, siivotusta Vite + React + TypeScript -projektipohjasta, jonka portiksi on asetettu `3003`. Projektin luominen ja ylimääräisten tiedostojen siivoaminen on kuvattu [demo 1:n README-tiedostossa](../demo-01/README.md#41-projektin-luominen).
 
 ```text
 demo-03/
@@ -63,9 +63,9 @@ demo-03/
 └── vite.config.ts
 ```
 
-## 6. Tutoriaali
+## 4. Tutoriaali
 
-### 6.1 Otsikko-komponentti ja propsit
+### 4.1 Otsikko-komponentti ja propsit
 
 Ensimmäiseksi tehdään otsikoille oma komponentti, koska se on sovelluksen yksinkertaisin osa eikä se tarvitse tilaa. Omat komponentit sijoitetaan `src/components`-kansioon, joka luodaan `src`-kansion sisään. Kansioon lisätään tiedosto `Otsikko.tsx`:
 
@@ -120,7 +120,7 @@ Ensimmäinen otsikko saa propsin `taso="iso"`, joten se näytetään `<h1>`-elem
 
 Aiheesta lisää: [Reactin dokumentaatio propsien välittämisestä](https://react.dev/learn/passing-props-to-a-component) ja [Reactin dokumentaatio komponenttien viennistä ja tuonnista](https://react.dev/learn/importing-and-exporting-components).
 
-### 6.2 Sivu-komponentti ja tyylit
+### 4.2 Sivu-komponentti ja tyylit
 
 Seuraavaksi koko sivun sisältö kootaan yhden `Sivu`-komponentin sisään, jotta sivun leveys määritellään yhdessä paikassa. `Sivu` tehdään ennen muita komponentteja, koska kaikki myöhemmin lisättävät osat sijoitetaan sen sisään.
 
@@ -208,7 +208,7 @@ export default App;
 > [!NOTE]
 > `.laskurinappi`-luokan leveys on 342 pikseliä, vaikka `.yhteenveto`-luokan leveys on 300 pikseliä. Selaimet laskevat painikkeen leveyteen mukaan reunukset ja sisävälin, mutta kappaleen leveyteen ne lisätään erikseen. Tästä syystä molemmat laatikot näkyvät sivulla yhtä leveinä.
 
-### 6.3 Yhteenveto-komponentti ja tila
+### 4.3 Yhteenveto-komponentti ja tila
 
 Kulkuneuvojen yhteismäärä tallennetaan `App`-komponentin tilaan, koska sekä yhteenveto että laskurinapit tarvitsevat sitä. Tila ja sitä näyttävä `Yhteenveto` tehdään ennen laskurinappeja, jotta napeilla on valmiina tila, jota ne päivittävät.
 
@@ -257,7 +257,7 @@ export default App;
 > [!NOTE]
 > Editori ilmoittaa tässä vaiheessa virheen `'setYhteensa' is declared but its value is never read`, koska päivitysfunktiota ei vielä käytetä missään. Virhe poistuu seuraavassa vaiheessa, kun `setYhteensa` otetaan käyttöön.
 
-### 6.4 Laskurinappi-komponentti
+### 4.4 Laskurinappi-komponentti
 
 Laskurinappi tehdään viimeisenä, koska se tarvitsee sekä oman tilan että funktion, jolla `App`-komponentin tilaa päivitetään.
 
@@ -333,7 +333,7 @@ export default App;
 
 Funktio välitetään propsina ilman sulkeita (`lisaaYksi`), jolloin propsin arvoksi tulee itse funktio eikä sen paluuarvo. Napin painaminen kasvattaa nyt sekä napin omaa laskuria että yhteenvedon lukua.
 
-### 6.5 Laskurinapit taulukosta
+### 4.5 Laskurinapit taulukosta
 
 Loput napit muodostetaan kulkuneuvojen nimet sisältävästä taulukosta `map()`-metodilla samalla tavalla kuin demo 2:n tehtävälistassa. Taulukko määritellään komponentin ulkopuolella, koska sen sisältö ei muutu.
 
@@ -390,7 +390,7 @@ Jokainen nappi saa saman `lisaaYksi`-funktion, mutta oman nimensä `children`-pr
 
 Aiheesta lisää: [Reactin dokumentaatio avaimista](https://react.dev/learn/rendering-lists#keeping-list-items-in-order-with-key).
 
-## 7. Projektin rakenne lopussa
+## 5. Projektin rakenne lopussa
 
 ```text
 demo-03/
@@ -417,7 +417,7 @@ demo-03/
 └── vite.config.ts
 ```
 
-## 8. Yhteenveto
+## 6. Yhteenveto
 
 Tässä demossa käytiin läpi:
 
@@ -430,7 +430,7 @@ Tässä demossa käytiin läpi:
 
 ---
 
-## 10. Jatka harjoittelua
+## 7. Jatka harjoittelua
 
 - Näytä yhteenvedon alla, mitä kulkuneuvoa painettiin viimeksi. Muuta `onPainallus`-propsin tyypiksi `(nimi: string) => void` ja kutsu sitä napissa arvolla `children`. Tallenna nimi `App`-komponentissa uuteen tilaan.
 - Lisää painike, joka nollaa yhteismäärän. Huomaa, että nappien omat laskurit eivät nollaudu, koska niiden tila on jokaisessa napissa erikseen. Mieti, mihin komponenttiin laskurien tila pitäisi siirtää, jotta kaikki luvut voisi nollata kerralla.

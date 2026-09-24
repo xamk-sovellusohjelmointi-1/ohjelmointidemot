@@ -1,22 +1,22 @@
 # Demo 4: MUI-komponenttikirjasto
 
-## 2. Sisällysluettelo
+## Sisällysluettelo
 
-- [3. Oppimistavoitteet](#3-oppimistavoitteet)
-- [4. Kloonaus ja käynnistys](#4-kloonaus-ja-käynnistys)
-- [5. Projektin rakenne alussa](#5-projektin-rakenne-alussa)
-- [6. Tutoriaali](#6-tutoriaali)
-  - [6.1 MUI:n ja Roboto-fontin asentaminen](#61-muin-ja-roboto-fontin-asentaminen)
-  - [6.2 Näkymän kehys ja otsikot](#62-näkymän-kehys-ja-otsikot)
-  - [6.3 Lomakkeen kentät ja painike](#63-lomakkeen-kentät-ja-painike)
-  - [6.4 Lomakkeen tiedot yhteen tilaan](#64-lomakkeen-tiedot-yhteen-tilaan)
-  - [6.5 Tilauksen vahvistaminen](#65-tilauksen-vahvistaminen)
-  - [6.6 Painikkeen aktivointi useEffect-hookilla](#66-painikkeen-aktivointi-useeffect-hookilla)
-- [7. Projektin rakenne lopussa](#7-projektin-rakenne-lopussa)
-- [8. Yhteenveto](#8-yhteenveto)
-- [10. Jatka harjoittelua](#10-jatka-harjoittelua)
+- [1. Oppimistavoitteet](#1-oppimistavoitteet)
+- [2. Kloonaus ja käynnistys](#2-kloonaus-ja-käynnistys)
+- [3. Projektin rakenne alussa](#3-projektin-rakenne-alussa)
+- [4. Tutoriaali](#4-tutoriaali)
+  - [4.1 MUI:n ja Roboto-fontin asentaminen](#41-muin-ja-roboto-fontin-asentaminen)
+  - [4.2 Näkymän kehys ja otsikot](#42-näkymän-kehys-ja-otsikot)
+  - [4.3 Lomakkeen kentät ja painike](#43-lomakkeen-kentät-ja-painike)
+  - [4.4 Lomakkeen tiedot yhteen tilaan](#44-lomakkeen-tiedot-yhteen-tilaan)
+  - [4.5 Tilauksen vahvistaminen](#45-tilauksen-vahvistaminen)
+  - [4.6 Painikkeen aktivointi useEffect-hookilla](#46-painikkeen-aktivointi-useeffect-hookilla)
+- [5. Projektin rakenne lopussa](#5-projektin-rakenne-lopussa)
+- [6. Yhteenveto](#6-yhteenveto)
+- [7. Jatka harjoittelua](#7-jatka-harjoittelua)
 
-## 3. Oppimistavoitteet
+## 1. Oppimistavoitteet
 
 Tässä demossa otetaan käyttöön ulkoinen komponenttikirjasto MUI (Material UI), ja sen valmiista komponenteista rakennetaan uutiskirjeen tilauslomake. Lomakkeen tiedot kerätään yhteen tilamuuttujaan, ja tilauspainike aktivoituu vasta, kun kaikki tiedot on annettu. Demo kattaa seuraavat tekniikat:
 
@@ -27,7 +27,7 @@ Tässä demossa otetaan käyttöön ulkoinen komponenttikirjasto MUI (Material U
 - Painikkeen ehdollinen poistaminen käytöstä `disabled`-propsilla
 - Tilan muutokseen reagoiminen `useEffect`-hookilla ja Reactin suositus laskea johdettu arvo suoraan renderöinnissä
 
-## 4. Kloonaus ja käynnistys
+## 2. Kloonaus ja käynnistys
 
 ```bash
 git clone https://github.com/xamk-sovellusohjelmointi-1/ohjelmointidemot.git
@@ -40,9 +40,9 @@ Sovellus käynnistyy osoitteeseen `http://localhost:3004`.
 
 Tutoriaali on kirjoitettu Vite 8:lla, Reactilla 19, TypeScriptillä 6.x ja MUI:n versiolla 9. TypeScriptistä on julkaistu tämän jälkeen pääversio 7, joten uudemman version asentaneella komennot, asetukset tai tyypitys saattavat poiketa tässä esitetystä.
 
-## 5. Projektin rakenne alussa
+## 3. Projektin rakenne alussa
 
-Demo aloitetaan uudesta, siivotusta Vite + React + TypeScript -projektipohjasta, jonka portiksi on asetettu `3004`. Projektin luominen ja ylimääräisten tiedostojen siivoaminen on kuvattu [demo 1:n README-tiedostossa](../demo-01/README.md#61-projektin-luominen).
+Demo aloitetaan uudesta, siivotusta Vite + React + TypeScript -projektipohjasta, jonka portiksi on asetettu `3004`. Projektin luominen ja ylimääräisten tiedostojen siivoaminen on kuvattu [demo 1:n README-tiedostossa](../demo-01/README.md#41-projektin-luominen).
 
 ```text
 demo-04/
@@ -63,9 +63,9 @@ demo-04/
 └── vite.config.ts
 ```
 
-## 6. Tutoriaali
+## 4. Tutoriaali
 
-### 6.1 MUI:n ja Roboto-fontin asentaminen
+### 4.1 MUI:n ja Roboto-fontin asentaminen
 
 **Komponenttikirjasto** (component library) on paketti, joka sisältää valmiiksi muotoiltuja ja toimivia React-komponentteja, kuten painikkeita, tekstikenttiä ja valintaruutuja. MUI:n komponentit noudattavat Googlen Material Design -suunnittelujärjestelmää. Kirjasto asennetaan ensimmäisenä, koska kaikki myöhemmät vaiheet käyttävät sen komponentteja.
 
@@ -99,7 +99,7 @@ Tiedosto `src/App.css` poistetaan, koska tässä demossa komponenttien ulkoasu m
 
 Aiheesta lisää: [MUI:n asennusohje](https://mui.com/material-ui/getting-started/installation/).
 
-### 6.2 Näkymän kehys ja otsikot
+### 4.2 Näkymän kehys ja otsikot
 
 Käyttöliittymä rakennetaan ennen lomakkeen logiikkaa, jotta jokaisen vaiheen tulos näkyy heti selaimessa. `App.tsx`-tiedoston sisältö korvataan seuraavalla:
 
@@ -131,7 +131,7 @@ Yksittäisen komponentin ulkoasua muokataan `sx`-propsilla, jolle annetaan olio 
 
 Aiheesta lisää: [MUI:n dokumentaatio `sx`-propsista](https://mui.com/system/getting-started/the-sx-prop/).
 
-### 6.3 Lomakkeen kentät ja painike
+### 4.3 Lomakkeen kentät ja painike
 
 Seuraavaksi lisätään lomakkeen kentät ja painike. Ne jätetään vielä ilman toimintoja, jotta lomakkeen rakenne on valmis ennen kuin siihen lisätään tilaa.
 
@@ -191,7 +191,7 @@ export default App;
 
 Aiheesta lisää: [MUI:n komponenttiluettelo](https://mui.com/material-ui/all-components/).
 
-### 6.4 Lomakkeen tiedot yhteen tilaan
+### 4.4 Lomakkeen tiedot yhteen tilaan
 
 Lomakkeen kolme tietoa tallennetaan yhteen tilamuuttujaan, jolloin ne voidaan käsitellä yhtenä kokonaisuutena. Tilan muoto määritellään rajapinnalla samalla tavalla kuin demo 2:ssa määriteltiin `Tehtava`-olion muoto.
 
@@ -273,7 +273,7 @@ MUI:n komponentit käyttävät samaa `onChange`-tapahtumaa kuin HTML:n `<input>`
 
 Aiheesta lisää: [Reactin dokumentaatio olioiden päivittämisestä tilassa](https://react.dev/learn/updating-objects-in-state).
 
-### 6.5 Tilauksen vahvistaminen
+### 4.5 Tilauksen vahvistaminen
 
 Kun tiedot ovat tilassa, painikkeelle voidaan lisätä toiminto. Lomaketta ei lähetetä mihinkään, vaan onnistunutta tilausta simuloidaan selaimen `alert`-ikkunalla. `App`-komponenttiin lisätään `tilaaUutiskirje`-funktio ja painikkeelle `onClick`-käsittelijä:
 
@@ -351,7 +351,7 @@ Viestin merkkijonossa `\n` on rivinvaihto, joten jokainen tieto näytetään oma
 
 Lomake toimii nyt, mutta sen voi lähettää tyhjänä tai ilman käyttöehtojen hyväksymistä. Tämä korjataan seuraavassa vaiheessa.
 
-### 6.6 Painikkeen aktivointi useEffect-hookilla
+### 4.6 Painikkeen aktivointi useEffect-hookilla
 
 Painike halutaan käyttöön vasta, kun nimi ja sähköpostiosoite on annettu ja käyttöehdot on hyväksytty. MUI:n `Button`-komponentilla on `disabled`-propsi, joka poistaa painikkeen käytöstä, kun sen arvo on `true`. Tieto lomakkeen kelpoisuudesta tallennetaan `tiedotOk`-tilaan, ja sitä päivitetään `useEffect`-hookilla aina, kun lomakkeen tiedot muuttuvat.
 
@@ -457,7 +457,7 @@ Aiheesta lisää: [Reactin dokumentaatio: You Might Not Need an Effect](https://
 > [!NOTE]
 > Projektin linter oxlint (`npm run lint`) varoittaa samasta asiasta säännöllä `react/set-state-in-effect`. Varoitus on poistettu käytöstä tältä yhdeltä riviltä kommentilla `// oxlint-disable-next-line react/set-state-in-effect`, koska efekti on koodissa tarkoituksella.
 
-## 7. Projektin rakenne lopussa
+## 5. Projektin rakenne lopussa
 
 ```text
 demo-04/
@@ -478,7 +478,7 @@ demo-04/
 └── vite.config.ts
 ```
 
-## 8. Yhteenveto
+## 6. Yhteenveto
 
 Tässä demossa käytiin läpi:
 
@@ -491,7 +491,7 @@ Tässä demossa käytiin läpi:
 
 ---
 
-## 10. Jatka harjoittelua
+## 7. Jatka harjoittelua
 
 - Korvaa `tiedotOk`-tila ja `useEffect` Reactin suosittelemalla tavalla. Laske `tiedotOk` suoraan komponentin rungossa `const`-muuttujaan ja poista tarpeettomat tuonnit. Painikkeen pitää toimia täsmälleen kuten ennenkin.
 - Tyhjennä lomake onnistuneen tilauksen jälkeen. Palauta `tilaaUutiskirje`-funktiossa tila alkuarvoihinsa. Jotta kentät tyhjenevät myös näkyvistä, anna jokaiselle `TextField`-komponentille `value`-propsi tilasta (`value={lomaketiedot.nimi}`) ja `Checkbox`-komponentille `checked`-propsi.

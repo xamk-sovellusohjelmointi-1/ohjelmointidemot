@@ -1,22 +1,22 @@
 # Demo 1: React ja Vite tutuksi
 
-## 2. Sisällysluettelo
+## Sisällysluettelo
 
-- [3. Oppimistavoitteet](#3-oppimistavoitteet)
-- [4. Kloonaus ja käynnistys](#4-kloonaus-ja-käynnistys)
-- [5. Projektin rakenne alussa](#5-projektin-rakenne-alussa)
-- [6. Tutoriaali](#6-tutoriaali)
-  - [6.1 Projektin luominen](#61-projektin-luominen)
-  - [6.2 Sovelluksen käynnistäminen](#62-sovelluksen-käynnistäminen)
-  - [6.3 Ylimääräisten tiedostojen siivoaminen](#63-ylimääräisten-tiedostojen-siivoaminen)
-  - [6.4 Tilan lisääminen komponenttiin](#64-tilan-lisääminen-komponenttiin)
-  - [6.5 Käyttäjän syötteen kaappaminen](#65-käyttäjän-syötteen-kaappaminen)
-  - [6.6 Tervehdyksen näyttäminen](#66-tervehdyksen-näyttäminen)
-- [7. Projektin rakenne lopussa](#7-projektin-rakenne-lopussa)
-- [8. Yhteenveto](#8-yhteenveto)
-- [10. Jatka harjoittelua](#10-jatka-harjoittelua)
+- [1. Oppimistavoitteet](#1-oppimistavoitteet)
+- [2. Kloonaus ja käynnistys](#2-kloonaus-ja-käynnistys)
+- [3. Projektin rakenne alussa](#3-projektin-rakenne-alussa)
+- [4. Tutoriaali](#4-tutoriaali)
+  - [4.1 Projektin luominen](#41-projektin-luominen)
+  - [4.2 Sovelluksen käynnistäminen](#42-sovelluksen-käynnistäminen)
+  - [4.3 Ylimääräisten tiedostojen siivoaminen](#43-ylimääräisten-tiedostojen-siivoaminen)
+  - [4.4 Tilan lisääminen komponenttiin](#44-tilan-lisääminen-komponenttiin)
+  - [4.5 Käyttäjän syötteen kaappaminen](#45-käyttäjän-syötteen-kaappaminen)
+  - [4.6 Tervehdyksen näyttäminen](#46-tervehdyksen-näyttäminen)
+- [5. Projektin rakenne lopussa](#5-projektin-rakenne-lopussa)
+- [6. Yhteenveto](#6-yhteenveto)
+- [7. Jatka harjoittelua](#7-jatka-harjoittelua)
 
-## 3. Oppimistavoitteet
+## 1. Oppimistavoitteet
 
 Tässä demossa rakennetaan ensimmäinen "Hello World" -typpinen React-sovellus Viten avulla tyhjästä projektipohjasta valmiiksi, toimivaksi komponentiksi. Demo kattaa seuraavat tekniikat:
 
@@ -27,7 +27,7 @@ Tässä demossa rakennetaan ensimmäinen "Hello World" -typpinen React-sovellus 
 - Ehdollinen renderöinti JSX:ssä
 - TypeScriptin perussyntaksi Reactin kanssa
 
-## 4. Kloonaus ja käynnistys
+## 2. Kloonaus ja käynnistys
 
 ```bash
 git clone https://github.com/xamk-sovellusohjelmointi-1/ohjelmointidemot.git
@@ -38,7 +38,7 @@ npm run dev
 
 Sovellus käynnistyy osoitteeseen `http://localhost:3001`.
 
-## 5. Projektin rakenne alussa
+## 3. Projektin rakenne alussa
 
 Demo aloitetaan tyhjästä Vite + React + TypeScript -projektipohjasta:
 
@@ -67,9 +67,9 @@ demo-01/
 └── vite.config.ts
 ```
 
-## 6. Tutoriaali
+## 4. Tutoriaali
 
-### 6.1 Projektin luominen
+### 4.1 Projektin luominen
 
 Projektipohja luodaan **npm**:llä (node package manager), joka on JavaScript-projektien paketinhallintatyökalu. Sen avulla asennetaan ja hallitaan **paketteja** (packages) eli valmiita koodikirjastoja, joita projekti tarvitsee. Komento
 
@@ -88,13 +88,13 @@ Tämä tutoriaali on kirjoitettu Vite 8:lla, Reactilla 19 ja TypeScriptillä 6.x
 > [!NOTE]
 > Projekti sisältää kaksi TypeScript-asetustiedostoa, `tsconfig.app.json` ja `tsconfig.node.json`. Jako on tehty siksi, että sovelluskoodi (`src`) ja Viten omat asetustiedostot ajetaan eri ympäristöissä, joten niillä on eri käännösasetukset.
 
-### 6.2 Sovelluksen käynnistäminen
+### 4.2 Sovelluksen käynnistäminen
 
 Riippuvuudet asennetaan komennolla `npm install`. Se lukee `package.json`-tiedostosta projektin tarvitsemat paketit ja lataa ne `node_modules`-kansioon, jota ei viedä GitHubiin versionhallintaan. Asennetut versiot kirjataan `package-lock.json`-tiedostoon, jotta sama riippuvuuspuu voidaan toistaa myöhemmin täsmälleen samanlaisena.
 
 Kehityspalvelin käynnistetään komennolla `npm run dev`, joka ajaa `package.json`-tiedoston `dev`-skriptin. Selaimessa `http://localhost:5173` (Viten oletusportti) näkyy tässä vaiheessa projektigeneraattorin oma esimerkkisivu laskureineen.
 
-### 6.3 Ylimääräisten tiedostojen siivoaminen
+### 4.3 Ylimääräisten tiedostojen siivoaminen
 
 Projektigeneraattorin oletussisältö ei kuulu tähän sovellukseen, joten se siivotaan ennen oman komponentin rakentamista. `public`- ja `src/assets`-kansiot poistetaan kokonaan, koska niiden kuvat ja ikonit liittyvät vain projektigeneraattorin esimerkkisivuun.
 
@@ -130,7 +130,7 @@ Jokaisella kurssin demolla on oma porttinsa, jonka numero kasvaa demon numeron m
 > [!NOTE]
 > Kansioiden poistamisen jälkeen selain näyttää virheilmoituksen, koska projektigeneraattorin `App.tsx` tuo vielä `src/assets`-kansiossa olleita kuvia. Ilmoitus on Viten virhenäkymä, ja siinä lukee `Failed to resolve import "./assets/hero.png" from "src/App.tsx". Does the file exist?`. Virhe poistuu seuraavassa vaiheessa, kun `App.tsx`-tiedoston sisältö korvataan. Tilanteessa kannattaa harjoitella virheilmoituksen lukemista suoraan selaimesta, koska ilmoitus kertoo sekä virheen syyn että tiedoston, jossa virhe on.
 
-### 6.4 Tilan lisääminen komponenttiin
+### 4.4 Tilan lisääminen komponenttiin
 
 `App.tsx` on sovelluksen pääkomponentti. React-sovellus koostuu **komponenteista** (components), jotka ovat funktioita, jotka palauttavat käyttöliittymän rakenteen **JSX**-syntaksilla. JSX muistuttaa HTML:ää, mutta se kirjoitetaan suoraan TypeScript-tiedoston sisään, ja se käännetään selaimen ymmärtämäksi JavaScript-koodiksi.
 
@@ -160,7 +160,7 @@ Demon `App.css` sisältää painikkeen ja tekstikentän omat tyylit sekä `terve
 
 Aiheesta lisää: [Reactin tila-dokumentaatio](https://react.dev/learn/state-a-components-memory) ja [TypeScriptin dokumentaatio](https://www.typescriptlang.org/docs/).
 
-### 6.5 Käyttäjän syötteen kaappaminen
+### 4.5 Käyttäjän syötteen kaappaminen
 
 Seuraavaksi lisätään tekstikenttä, johon käyttäjä kirjoittaa nimensä:
 
@@ -201,7 +201,7 @@ export default App;
 > [!NOTE]
 > `console.log`-kutsut eivät ole toiminnan kannalta välttämättömiä. Ne on jätetty näkyviin, jotta tapahtumaolion (`e`), sen kohteen (`e.target`) ja arvon (`e.target.value`) rakenteen voi tarkistaa selaimen kehittäjätyökalujen konsolista (dev tools, F12).
 
-### 6.6 Tervehdyksen näyttäminen
+### 4.6 Tervehdyksen näyttäminen
 
 Viimeisenä lisätään painike, joka muodostaa tervehdyksen, sekä ehto, joka näyttää tervehdyksen vain silloin, kun se on olemassa:
 
@@ -259,7 +259,7 @@ export default App;
 
 Palautuslauseen lopussa oleva `Boolean(tervehdys) && <p>...</p>` on ehdollinen renderöinti. JSX-elementti `<p>` näytetään vain, jos `tervehdys` ei ole tyhjä merkkijono. Tyhjä merkkijono muunnetaan `Boolean`-funktiolla arvoksi `false`, jolloin `&&`-operaattori ei renderöi mitään.
 
-## 7. Projektin rakenne lopussa
+## 5. Projektin rakenne lopussa
 
 ```text
 demo-01/
@@ -281,7 +281,7 @@ demo-01/
 └── vite.config.ts
 ```
 
-## 8. Yhteenveto
+## 6. Yhteenveto
 
 Tässä demossa käytiin läpi:
 
@@ -294,7 +294,7 @@ Tässä demossa käytiin läpi:
 
 ---
 
-## 10. Jatka harjoittelua
+## 7. Jatka harjoittelua
 
 - Lisää painike, joka tyhjentää sekä `nimi`- että `tervehdys`-tilat takaisin alkuarvoihin.
 - Estä tervehdyksen muodostaminen, jos käyttäjä on syöttänyt pelkkiä välilyöntejä. Merkkijonon reunojen tyhjän tilan voi poistaa `trim()`-metodilla ennen tarkistusta.

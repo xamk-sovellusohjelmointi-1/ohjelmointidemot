@@ -1,25 +1,25 @@
 # Demo 6: Reititysparametrit - Tehtävälista v2
 
-## 2. Sisällysluettelo
+## Sisällysluettelo
 
-- [3. Oppimistavoitteet](#3-oppimistavoitteet)
-- [4. Kloonaus ja käynnistys](#4-kloonaus-ja-käynnistys)
-- [5. Projektin rakenne alussa](#5-projektin-rakenne-alussa)
-- [6. Tutoriaali](#6-tutoriaali)
-  - [6.1 Kirjastojen asentaminen](#61-kirjastojen-asentaminen)
-  - [6.2 Käynnistystiedosto ja perustyylit](#62-käynnistystiedosto-ja-perustyylit)
-  - [6.3 Jaettu Tehtava-tyyppi](#63-jaettu-tehtava-tyyppi)
-  - [6.4 Otsikko-komponentti](#64-otsikko-komponentti)
-  - [6.5 Tehtävälistanäkymä](#65-tehtävälistanäkymä)
-  - [6.6 Lisäysnäkymä](#66-lisäysnäkymä)
-  - [6.7 Tila ja reitit App-komponentissa](#67-tila-ja-reitit-app-komponentissa)
-  - [6.8 Poistonäkymä ja useParams-hook](#68-poistonäkymä-ja-useparams-hook)
-  - [6.9 Dynaaminen reitti ja poistolinkki](#69-dynaaminen-reitti-ja-poistolinkki)
-- [7. Projektin rakenne lopussa](#7-projektin-rakenne-lopussa)
-- [8. Yhteenveto](#8-yhteenveto)
-- [10. Jatka harjoittelua](#10-jatka-harjoittelua)
+- [1. Oppimistavoitteet](#1-oppimistavoitteet)
+- [2. Kloonaus ja käynnistys](#2-kloonaus-ja-käynnistys)
+- [3. Projektin rakenne alussa](#3-projektin-rakenne-alussa)
+- [4. Tutoriaali](#4-tutoriaali)
+  - [4.1 Kirjastojen asentaminen](#41-kirjastojen-asentaminen)
+  - [4.2 Käynnistystiedosto ja perustyylit](#42-käynnistystiedosto-ja-perustyylit)
+  - [4.3 Jaettu Tehtava-tyyppi](#43-jaettu-tehtava-tyyppi)
+  - [4.4 Otsikko-komponentti](#44-otsikko-komponentti)
+  - [4.5 Tehtävälistanäkymä](#45-tehtävälistanäkymä)
+  - [4.6 Lisäysnäkymä](#46-lisäysnäkymä)
+  - [4.7 Tila ja reitit App-komponentissa](#47-tila-ja-reitit-app-komponentissa)
+  - [4.8 Poistonäkymä ja useParams-hook](#48-poistonäkymä-ja-useparams-hook)
+  - [4.9 Dynaaminen reitti ja poistolinkki](#49-dynaaminen-reitti-ja-poistolinkki)
+- [5. Projektin rakenne lopussa](#5-projektin-rakenne-lopussa)
+- [6. Yhteenveto](#6-yhteenveto)
+- [7. Jatka harjoittelua](#7-jatka-harjoittelua)
 
-## 3. Oppimistavoitteet
+## 1. Oppimistavoitteet
 
 Tässä demossa rakennetaan tehtävälistasovellus, jossa on kolme näkymää. Tehtäviä voi merkitä tehdyiksi, lisätä ja poistaa. Poistonäkymän osoitteessa on poistettavan tehtävän tunniste, ja näkymä lukee sen osoitteesta React Routerin avulla. Demo kattaa seuraavat tekniikat:
 
@@ -32,7 +32,7 @@ Tässä demossa rakennetaan tehtävälistasovellus, jossa on kolme näkymää. T
 - Syötekentän arvon lukeminen `useRef`-hookilla MUI:n `TextField`-komponentista
 - Listarivin toimintopainikkeet MUI:n `ListItem`-, `ListItemIcon`- ja `IconButton`-komponenteilla
 
-## 4. Kloonaus ja käynnistys
+## 2. Kloonaus ja käynnistys
 
 ```bash
 git clone https://github.com/xamk-sovellusohjelmointi-1/ohjelmointidemot.git
@@ -45,9 +45,9 @@ Sovellus käynnistyy osoitteeseen `http://localhost:3006`.
 
 Tutoriaali on kirjoitettu Vite 8:lla, Reactilla 19, TypeScriptillä 6.x, MUI:n versiolla 9 ja React Routerin versiolla 8. TypeScriptistä on julkaistu tämän jälkeen pääversio 7, joten uudemman version asentaneella komennot, asetukset tai tyypitys saattavat poiketa tässä esitetystä.
 
-## 5. Projektin rakenne alussa
+## 3. Projektin rakenne alussa
 
-Demo aloitetaan uudesta, siivotusta Vite + React + TypeScript -projektipohjasta, jonka portiksi on asetettu `3006`. Projektin luominen ja ylimääräisten tiedostojen siivoaminen on kuvattu [demo 1:n README-tiedostossa](../demo-01/README.md#61-projektin-luominen).
+Demo aloitetaan uudesta, siivotusta Vite + React + TypeScript -projektipohjasta, jonka portiksi on asetettu `3006`. Projektin luominen ja ylimääräisten tiedostojen siivoaminen on kuvattu [demo 1:n README-tiedostossa](../demo-01/README.md#41-projektin-luominen).
 
 ```text
 demo-06/
@@ -68,9 +68,9 @@ demo-06/
 └── vite.config.ts
 ```
 
-## 6. Tutoriaali
+## 4. Tutoriaali
 
-### 6.1 Kirjastojen asentaminen
+### 4.1 Kirjastojen asentaminen
 
 Kirjastot asennetaan ensin, koska jokainen myöhempi vaihe käyttää niitä.
 
@@ -84,7 +84,7 @@ Paketit ovat samat kuin demossa 5. MUI tuo käyttöliittymäkomponentit, `@mui/i
 
 Tiedosto `src/App.css` poistetaan, koska tässäkin demossa komponenttien ulkoasu määritellään MUI:n omilla keinoilla.
 
-### 6.2 Käynnistystiedosto ja perustyylit
+### 4.2 Käynnistystiedosto ja perustyylit
 
 Reititys ja Roboto-fontti otetaan käyttöön tiedostossa `src/main.tsx` samalla tavalla kuin demossa 5.
 
@@ -107,9 +107,9 @@ createRoot(document.getElementById('root')!).render(
 )
 ```
 
-Tiedostosta poistetaan rivi `import './index.css'`, ja samalla poistetaan tiedosto `src/index.css`. Sovellukseen lisätään vaiheessa 6.7 MUI:n `CssBaseline`-komponentti, joka asettaa `body`-elementin reunukseksi nollan ja fontiksi Roboton. Demossa 5 nähtiin, että nämä tyylit korvaavat `index.css`-tiedoston `margin: 50px`-reunuksen ja Arial-fontin. Kun tiedoston jokainen tyyli korvautuu, tiedostolla ei ole enää vaikutusta, joten se poistetaan kokonaan.
+Tiedostosta poistetaan rivi `import './index.css'`, ja samalla poistetaan tiedosto `src/index.css`. Sovellukseen lisätään vaiheessa 4.7 MUI:n `CssBaseline`-komponentti, joka asettaa `body`-elementin reunukseksi nollan ja fontiksi Roboton. Demossa 5 nähtiin, että nämä tyylit korvaavat `index.css`-tiedoston `margin: 50px`-reunuksen ja Arial-fontin. Kun tiedoston jokainen tyyli korvautuu, tiedostolla ei ole enää vaikutusta, joten se poistetaan kokonaan.
 
-### 6.3 Jaettu Tehtava-tyyppi
+### 4.3 Jaettu Tehtava-tyyppi
 
 Sovelluksen tieto on tehtävien taulukko. Tehtävän muoto määritellään ensimmäisenä, koska kaikki myöhemmät vaiheet käyttävät sitä. Demossa 2 `Tehtava`-rajapinta määriteltiin `App.tsx`-tiedostossa, koska sitä käytti vain yksi komponentti. Tässä demossa samaa tyyppiä käyttävät `App`, `Tehtavalista` ja `PoistaTehtava`. Jos rajapinta kopioitaisiin jokaiseen tiedostoon, jokainen kopio pitäisi muistaa päivittää, kun tehtävään lisätään uusi kenttä. Tästä syystä tyyppi kirjoitetaan yhteen paikkaan, josta kaikki tiedostot tuovat sen.
 
@@ -135,7 +135,7 @@ Tuontilauseen `type`-sana tekee siitä **tyyppituonnin** (type-only import). Typ
 
 Aiheesta lisää: [TypeScriptin dokumentaatio moduuleista](https://www.typescriptlang.org/docs/handbook/2/modules.html).
 
-### 6.4 Otsikko-komponentti
+### 4.4 Otsikko-komponentti
 
 Kaikissa näkymissä on otsikko, joten sen ulkoasu kootaan yhteen komponenttiin ennen näkymiä. Luodaan tiedosto `src/components/Otsikko.tsx`:
 
@@ -166,7 +166,7 @@ export default Otsikko;
 
 Komponentti on rakenteeltaan sama kuin demon 3 `Otsikko`. Otsikon teksti annetaan `children`-propsina, ja valinnainen `tyyli`-propsi saa oletusarvon `"iso"`. Demon 3 versio valitsi `switch`-rakenteella HTML-otsikkoelementin, mutta tämä versio vaihtaa MUI:n `Typography`-komponentin fonttikokoa ehdollisella lausekkeella. Sovelluksen pääotsikko käyttää oletuskokoa, ja näkymien otsikot saavat propsin `tyyli="pieni"`.
 
-### 6.5 Tehtävälistanäkymä
+### 4.5 Tehtävälistanäkymä
 
 Sovelluksessa on kolme näkymää, ja jokainen niistä on oma komponenttinsa `src/components`-kansiossa kuten demossa 5. Näkymät tehdään ennen reittejä, koska reitin määrittelyssä kerrotaan, mikä komponentti kyseisessä osoitteessa näytetään. Ensimmäisenä tehdään aloitusnäkymä, joka listaa tehtävät.
 
@@ -239,7 +239,7 @@ Lisäyspainike on linkki polkuun `/uusi`, ja se tehdään `component={Link}`-pro
 
 Aiheesta lisää: [Reactin dokumentaatio tapahtumien käsittelystä](https://react.dev/learn/responding-to-events#passing-event-handlers-as-props).
 
-### 6.6 Lisäysnäkymä
+### 4.6 Lisäysnäkymä
 
 Luodaan tiedosto `src/components/UusiTehtava.tsx`:
 
@@ -297,7 +297,7 @@ Lausekkeessa `uusiTehtavaRef.current?.value` on **valinnainen ketjutus** (option
 
 Aiheesta lisää: [MUI:n TextField-dokumentaatio](https://mui.com/material-ui/react-text-field/).
 
-### 6.7 Tila ja reitit App-komponentissa
+### 4.7 Tila ja reitit App-komponentissa
 
 Kumpikin näkymä tarvitsee samaa tehtävälistaa. `Tehtavalista` näyttää sen, ja `UusiTehtava` lisää siihen. Jos kummallakin näkymällä olisi oma `useState`-tilansa, lisätty tehtävä ei näkyisi listassa. Siksi tila sijoitetaan lähimpään yhteiseen yläkomponenttiin, joka tässä on `App`. Tätä kutsutaan **tilan nostamiseksi** (lifting state up). `App` antaa listan näkymille propseina, ja näkymät muuttavat sitä vain `App`-komponentin funktioiden kautta.
 
@@ -370,7 +370,7 @@ Näkymien välillä siirtyminen ei tyhjennä listaa, koska `App` pysyy näytöll
 
 Aiheesta lisää: [Reactin dokumentaatio tilan jakamisesta komponenttien välillä](https://react.dev/learn/sharing-state-between-components).
 
-### 6.8 Poistonäkymä ja useParams-hook
+### 4.8 Poistonäkymä ja useParams-hook
 
 Sovellukseen lisätään poistonäkymä, joka kysyy vahvistuksen ennen tehtävän poistamista. Näkymän täytyy tietää, mikä tehtävä poistetaan. Tieto kulkee näkymään selaimen osoitteessa, esimerkiksi `/poista/3f2a...`, jossa osoitteen loppuosa on tehtävän `id`. Osoitteen muuttuvaa osaa kutsutaan **reititysparametriksi** (route parameter). React Routerin dokumentaatiossa sitä kutsutaan myös dynaamiseksi segmentiksi.
 
@@ -435,7 +435,7 @@ Poistonäkymä noudattaa samaa mallia kuin lisäysnäkymä. Tieto annetaan `App`
 
 Aiheesta lisää: [React Routerin `useParams`-dokumentaatio](https://reactrouter.com/api/hooks/useParams).
 
-### 6.9 Dynaaminen reitti ja poistolinkki
+### 4.9 Dynaaminen reitti ja poistolinkki
 
 Poistonäkymä tarvitsee vielä reitin, tehtävän poistavan funktion ja linkin, joka vie näkymään oikealla `id`-arvolla. Ensin `App`-komponenttiin lisätään `poistaTehtava`-funktio ja poistonäkymän reitti.
 
@@ -573,7 +573,7 @@ Sovelluksen kaikki kolme näkymää toimivat nyt. Tehtäviä voi merkitä tehdyi
 
 Aiheesta lisää: [React Routerin dokumentaatio dynaamisista segmenteistä](https://reactrouter.com/start/declarative/routing#dynamic-segments) ja [MUI:n List-dokumentaatio](https://mui.com/material-ui/react-list/).
 
-## 7. Projektin rakenne lopussa
+## 5. Projektin rakenne lopussa
 
 ```text
 demo-06/
@@ -599,7 +599,7 @@ demo-06/
 └── vite.config.ts
 ```
 
-## 8. Yhteenveto
+## 6. Yhteenveto
 
 Tässä demossa käytiin läpi:
 
@@ -611,7 +611,7 @@ Tässä demossa käytiin läpi:
 
 ---
 
-## 10. Jatka harjoittelua
+## 7. Jatka harjoittelua
 
 - Näytä poistonäkymässä ilmoitus "Tehtävää ei löytynyt", jos osoitteen `id` ei vastaa yhtäkään tehtävää. Muuttuja `poistettava` on silloin `undefined`, joten ehdollisella renderöinnillä voi näyttää ilmoituksen ja paluulinkin poistopainikkeen sijaan.
 - Tee muokkausnäkymä reitille `/muokkaa/:id`, jossa tehtävän nimeä voi muuttaa. Näkymä voi lukea parametrin samalla tavalla kuin `PoistaTehtava`, ja `App`-komponentin uusi funktio voi päivittää nimen `map`-metodilla samaan tapaan kuin `merkitseTehdyksi`.

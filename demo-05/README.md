@@ -1,24 +1,24 @@
 # Demo 5: Reititys (React Router)
 
-## 2. Sisällysluettelo
+## Sisällysluettelo
 
-- [3. Oppimistavoitteet](#3-oppimistavoitteet)
-- [4. Kloonaus ja käynnistys](#4-kloonaus-ja-käynnistys)
-- [5. Projektin rakenne alussa](#5-projektin-rakenne-alussa)
-- [6. Tutoriaali](#6-tutoriaali)
-  - [6.1 Kirjastojen asentaminen](#61-kirjastojen-asentaminen)
-  - [6.2 Reitityksen käyttöönotto BrowserRouterilla](#62-reitityksen-käyttöönotto-browserrouterilla)
-  - [6.3 Näkymäkomponentit](#63-näkymäkomponentit)
-  - [6.4 Reittien määrittely](#64-reittien-määrittely)
-  - [6.5 Navigointi Link-komponentilla](#65-navigointi-link-komponentilla)
-  - [6.6 Ohjelmallinen navigointi useNavigate-hookilla](#66-ohjelmallinen-navigointi-usenavigate-hookilla)
-  - [6.7 Yläpalkki ja CssBaseline](#67-yläpalkki-ja-cssbaseline)
-  - [6.8 Sivuvalikko Drawer-komponentilla](#68-sivuvalikko-drawer-komponentilla)
-- [7. Projektin rakenne lopussa](#7-projektin-rakenne-lopussa)
-- [8. Yhteenveto](#8-yhteenveto)
-- [10. Jatka harjoittelua](#10-jatka-harjoittelua)
+- [1. Oppimistavoitteet](#1-oppimistavoitteet)
+- [2. Kloonaus ja käynnistys](#2-kloonaus-ja-käynnistys)
+- [3. Projektin rakenne alussa](#3-projektin-rakenne-alussa)
+- [4. Tutoriaali](#4-tutoriaali)
+  - [4.1 Kirjastojen asentaminen](#41-kirjastojen-asentaminen)
+  - [4.2 Reitityksen käyttöönotto BrowserRouterilla](#42-reitityksen-käyttöönotto-browserrouterilla)
+  - [4.3 Näkymäkomponentit](#43-näkymäkomponentit)
+  - [4.4 Reittien määrittely](#44-reittien-määrittely)
+  - [4.5 Navigointi Link-komponentilla](#45-navigointi-link-komponentilla)
+  - [4.6 Ohjelmallinen navigointi useNavigate-hookilla](#46-ohjelmallinen-navigointi-usenavigate-hookilla)
+  - [4.7 Yläpalkki ja CssBaseline](#47-yläpalkki-ja-cssbaseline)
+  - [4.8 Sivuvalikko Drawer-komponentilla](#48-sivuvalikko-drawer-komponentilla)
+- [5. Projektin rakenne lopussa](#5-projektin-rakenne-lopussa)
+- [6. Yhteenveto](#6-yhteenveto)
+- [7. Jatka harjoittelua](#7-jatka-harjoittelua)
 
-## 3. Oppimistavoitteet
+## 1. Oppimistavoitteet
 
 Tässä demossa rakennetaan kahden näkymän sovellus, jossa näkymästä toiseen siirrytään React Router -kirjaston avulla ilman sivun uudelleenlatausta. Näkymien välillä liikutaan painikkeilla ja MUI:n komponenteista rakennetulla sivuvalikolla. Demo kattaa seuraavat tekniikat:
 
@@ -31,7 +31,7 @@ Tässä demossa rakennetaan kahden näkymän sovellus, jossa näkymästä toisee
 - Sivuvalikon avaaminen ja sulkeminen `Drawer`-komponentilla ja totuusarvotilalla
 - Selaimen oletustyylien yhtenäistäminen `CssBaseline`-komponentilla
 
-## 4. Kloonaus ja käynnistys
+## 2. Kloonaus ja käynnistys
 
 ```bash
 git clone https://github.com/xamk-sovellusohjelmointi-1/ohjelmointidemot.git
@@ -44,9 +44,9 @@ Sovellus käynnistyy osoitteeseen `http://localhost:3005`.
 
 Tutoriaali on kirjoitettu Vite 8:lla, Reactilla 19, TypeScriptillä 6.x, MUI:n versiolla 9 ja React Routerin versiolla 8. TypeScriptistä on julkaistu tämän jälkeen pääversio 7, joten uudemman version asentaneella komennot, asetukset tai tyypitys saattavat poiketa tässä esitetystä.
 
-## 5. Projektin rakenne alussa
+## 3. Projektin rakenne alussa
 
-Demo aloitetaan uudesta, siivotusta Vite + React + TypeScript -projektipohjasta, jonka portiksi on asetettu `3005`. Projektin luominen ja ylimääräisten tiedostojen siivoaminen on kuvattu [demo 1:n README-tiedostossa](../demo-01/README.md#61-projektin-luominen).
+Demo aloitetaan uudesta, siivotusta Vite + React + TypeScript -projektipohjasta, jonka portiksi on asetettu `3005`. Projektin luominen ja ylimääräisten tiedostojen siivoaminen on kuvattu [demo 1:n README-tiedostossa](../demo-01/README.md#41-projektin-luominen).
 
 ```text
 demo-05/
@@ -67,9 +67,9 @@ demo-05/
 └── vite.config.ts
 ```
 
-## 6. Tutoriaali
+## 4. Tutoriaali
 
-### 6.1 Kirjastojen asentaminen
+### 4.1 Kirjastojen asentaminen
 
 Kaikki kirjastot asennetaan ensin, koska jokainen myöhempi vaihe käyttää niitä.
 
@@ -90,7 +90,7 @@ Aiheesta lisää: [React Routerin asennusohje](https://reactrouter.com/start/dec
 > [!NOTE]
 > Monissa verkosta löytyvissä ohjeissa React Router tuodaan paketista `react-router-dom`. Versiosta 8 alkaen tätä pakettia ei enää käytetä, ja kaikki tämän demon tuonnit tehdään paketista `react-router`. Muutos on kuvattu [React Routerin päivitysohjeessa](https://reactrouter.com/upgrading/v7).
 
-### 6.2 Reitityksen käyttöönotto BrowserRouterilla
+### 4.2 Reitityksen käyttöönotto BrowserRouterilla
 
 Reititys otetaan käyttöön sovelluksen käynnistystiedostossa `src/main.tsx`. Samaan tiedostoon lisätään Roboto-fontin painot kuten demossa 4.
 
@@ -118,7 +118,7 @@ createRoot(document.getElementById('root')!).render(
 
 Aiheesta lisää: [React Routerin dokumentaatio reitityksestä](https://reactrouter.com/start/declarative/routing).
 
-### 6.3 Näkymäkomponentit
+### 4.3 Näkymäkomponentit
 
 Sovelluksessa on kaksi näkymää, aloitusnäkymä ja infonäkymä. Näkymät tehdään ennen reittejä, koska reitin määrittelyssä kerrotaan, mikä komponentti kyseisessä osoitteessa näytetään. Kumpikin näkymä on oma komponenttinsa, ja ne sijoitetaan `src/components`-kansioon samalla tavalla kuin demon 3 komponentit.
 
@@ -174,7 +174,7 @@ Molemmat komponentit käyttävät demosta 4 tuttuja `Container`- ja `Typography`
 
 Jokainen komponenttitiedosto päättyy oletusvientiin `export default`, jotta komponentti voidaan tuoda toiseen tiedostoon ilman aaltosulkeita.
 
-### 6.4 Reittien määrittely
+### 4.4 Reittien määrittely
 
 Kun näkymät ovat olemassa, `App.tsx`-tiedostossa määritellään, missä osoitteessa kukin näkymä näytetään. `App.tsx`-tiedoston sisältö korvataan seuraavalla:
 
@@ -204,7 +204,7 @@ Reitit voi nyt kokeilla kirjoittamalla selaimen osoiteriville `http://localhost:
 > [!NOTE]
 > Viten kehityspalvelin palauttaa `index.html`-tiedoston myös osoitteelle `/info`, vaikka projektissa ei ole sen nimistä tiedostoa. Tästä syystä infonäkymä avautuu myös silloin, kun osoite kirjoitetaan suoraan osoiteriville tai sivu päivitetään infonäkymässä.
 
-### 6.5 Navigointi Link-komponentilla
+### 4.5 Navigointi Link-komponentilla
 
 Käyttäjä ei yleensä kirjoita osoitteita itse, joten näkymiin lisätään painikkeet toiseen näkymään siirtymistä varten. Tavallinen HTML-linkki `<a href="/info">` lataisi koko sivun uudelleen palvelimelta, jolloin React-sovellus käynnistyisi alusta ja sen tila katoaisi. React Routerin `Link`-komponentti tuottaa sivulle `<a>`-elementin, mutta sitä painettaessa React Router vaihtaa osoitteen ja näkymän ilman uudelleenlatausta. `Link`-komponentille kohdepolku annetaan `to`-propsina.
 
@@ -274,7 +274,7 @@ Koska `Link` tuottaa tavallisen `<a>`-elementin, selaimen omat linkkitoiminnot, 
 
 Aiheesta lisää: [React Routerin dokumentaatio navigoinnista](https://reactrouter.com/start/declarative/navigating) ja [MUI:n ohje reitityskirjastojen käytöstä](https://mui.com/material-ui/integrations/routing/).
 
-### 6.6 Ohjelmallinen navigointi useNavigate-hookilla
+### 4.6 Ohjelmallinen navigointi useNavigate-hookilla
 
 Infonäkymään lisätään toinen paluupainike, joka kysyy ennen siirtymistä vahvistuksen käyttäjältä. `Link` siirtyy aina, kun sitä painetaan, joten tähän tarvitaan **ohjelmallista navigointia** (programmatic navigation), jossa siirtyminen tehdään koodista vasta ehdon täytyttyä.
 
@@ -327,7 +327,7 @@ React Router suosittelee tavalliseen navigointiin `Link`-komponenttia, koska se 
 
 Aiheesta lisää: [React Routerin dokumentaatio navigoinnista](https://reactrouter.com/start/declarative/navigating) ja [MDN:n dokumentaatio `window.confirm`-metodista](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm).
 
-### 6.7 Yläpalkki ja CssBaseline
+### 4.7 Yläpalkki ja CssBaseline
 
 Näkymien välillä voi nyt liikkua painikkeilla. Seuraavaksi sovellukseen tehdään yläpalkki, joka näkyy kaikissa näkymissä ja johon sivuvalikko lisätään seuraavassa vaiheessa. Yläpalkki tehdään omaksi `Valikko`-komponentikseen. Luodaan tiedosto `src/components/Valikko.tsx`:
 
@@ -399,7 +399,7 @@ Komponentti palauttaa nyt useamman elementin, joten ne ympäröidään fragmenti
 
 Aiheesta lisää: [MUI:n CssBaseline-dokumentaatio](https://mui.com/material-ui/react-css-baseline/).
 
-### 6.8 Sivuvalikko Drawer-komponentilla
+### 4.8 Sivuvalikko Drawer-komponentilla
 
 Viimeisenä yläpalkin valikkopainikkeelle lisätään toiminto, joka avaa sivun vasemmasta reunasta liukuvan valikon. Valikko on joko auki tai kiinni, joten sen tila tallennetaan totuusarvona `valikkoAuki`-tilaan samalla tavalla kuin demon 4 `tiedotOk`-tila.
 
@@ -484,7 +484,7 @@ Valikko halutaan sulkea, kun jotain sen riviä painetaan. Tätä varten `onClick
 
 Aiheesta lisää: [MUI:n Drawer-dokumentaatio](https://mui.com/material-ui/react-drawer/), [MUI:n List-dokumentaatio](https://mui.com/material-ui/react-list/) ja [MDN:n ohje tapahtuman kuplimisesta](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/Event_bubbling).
 
-## 7. Projektin rakenne lopussa
+## 5. Projektin rakenne lopussa
 
 ```text
 demo-05/
@@ -509,7 +509,7 @@ demo-05/
 └── vite.config.ts
 ```
 
-## 8. Yhteenveto
+## 6. Yhteenveto
 
 Tässä demossa käytiin läpi:
 
@@ -522,7 +522,7 @@ Tässä demossa käytiin läpi:
 
 ---
 
-## 10. Jatka harjoittelua
+## 7. Jatka harjoittelua
 
 - Lisää sovellukseen kolmas näkymä, esimerkiksi `Yhteystiedot`. Tee näkymälle oma komponentti `src/components`-kansioon, lisää sille `Route` `App.tsx`-tiedostoon ja lisää sivuvalikkoon uusi `ListItemButton` sopivalla ikonilla. Ikonin voi etsiä MUI:n ikonien hakutyökalusta.
 - Tee sovellukseen näkymä, joka näytetään, jos osoite ei vastaa yhtäkään reittiä. Reitti, jonka polku on `path="*"`, näytetään silloin, kun mikään muu reitti ei vastaa osoitetta.

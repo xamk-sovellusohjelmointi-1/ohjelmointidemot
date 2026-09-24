@@ -1,20 +1,20 @@
 # Demo 2: Lisää React-perusteita - Tehtävälista
 
-## 2. Sisällysluettelo
+## Sisällysluettelo
 
-- [3. Oppimistavoitteet](#3-oppimistavoitteet)
-- [4. Kloonaus ja käynnistys](#4-kloonaus-ja-käynnistys)
-- [5. Projektin rakenne alussa](#5-projektin-rakenne-alussa)
-- [6. Tutoriaali](#6-tutoriaali)
-  - [6.1 Tehtävän tietomalli ja alkutila](#61-tehtävän-tietomalli-ja-alkutila)
-  - [6.2 Uuden tehtävän lisääminen](#62-uuden-tehtävän-lisääminen)
-  - [6.3 Tehtävälistan renderöinti](#63-tehtävälistan-renderöinti)
-  - [6.4 Tehtävän merkitseminen tehdyksi](#64-tehtävän-merkitseminen-tehdyksi)
-- [7. Projektin rakenne lopussa](#7-projektin-rakenne-lopussa)
-- [8. Yhteenveto](#8-yhteenveto)
-- [10. Jatka harjoittelua](#10-jatka-harjoittelua)
+- [1. Oppimistavoitteet](#1-oppimistavoitteet)
+- [2. Kloonaus ja käynnistys](#2-kloonaus-ja-käynnistys)
+- [3. Projektin rakenne alussa](#3-projektin-rakenne-alussa)
+- [4. Tutoriaali](#4-tutoriaali)
+  - [4.1 Tehtävän tietomalli ja alkutila](#41-tehtävän-tietomalli-ja-alkutila)
+  - [4.2 Uuden tehtävän lisääminen](#42-uuden-tehtävän-lisääminen)
+  - [4.3 Tehtävälistan renderöinti](#43-tehtävälistan-renderöinti)
+  - [4.4 Tehtävän merkitseminen tehdyksi](#44-tehtävän-merkitseminen-tehdyksi)
+- [5. Projektin rakenne lopussa](#5-projektin-rakenne-lopussa)
+- [6. Yhteenveto](#6-yhteenveto)
+- [7. Jatka harjoittelua](#7-jatka-harjoittelua)
 
-## 3. Oppimistavoitteet
+## 1. Oppimistavoitteet
 
 Tässä demossa laajennetaan komponentin tila yksittäisestä arvosta olioita sisältäväksi taulukoksi ja rakennetaan sen pohjalta yksinkertainen tehtävälista. Demo kattaa seuraavat tekniikat:
 
@@ -24,7 +24,7 @@ Tässä demossa laajennetaan komponentin tila yksittäisestä arvosta olioita si
 - `useRef`-hookin käyttö syötekentän arvon lukemiseen
 - Listan renderöinti `map()`-metodilla ja `key`-propsilla
 
-## 4. Kloonaus ja käynnistys
+## 2. Kloonaus ja käynnistys
 
 ```bash
 git clone https://github.com/xamk-sovellusohjelmointi-1/ohjelmointidemot.git
@@ -37,9 +37,9 @@ Sovellus käynnistyy osoitteeseen `http://localhost:3002`.
 
 Tutoriaali on kirjoitettu Vite 8:lla, Reactilla 19 ja TypeScriptillä 6.x. TypeScriptistä on julkaistu tämän jälkeen pääversio 7, joten uudemman version asentaneella komennot, asetukset tai tyypitys saattavat poiketa tässä esitetystä.
 
-## 5. Projektin rakenne alussa
+## 3. Projektin rakenne alussa
 
-Demo aloitetaan uudesta, siivotusta Vite + React + TypeScript -projektipohjasta, jonka portiksi on asetettu `3002`. Projektin luominen ja ylimääräisten tiedostojen siivoaminen on kuvattu [demo 1:n README-tiedostossa](../demo-01/README.md#61-projektin-luominen).
+Demo aloitetaan uudesta, siivotusta Vite + React + TypeScript -projektipohjasta, jonka portiksi on asetettu `3002`. Projektin luominen ja ylimääräisten tiedostojen siivoaminen on kuvattu [demo 1:n README-tiedostossa](../demo-01/README.md#41-projektin-luominen).
 
 ```text
 demo-02/
@@ -60,9 +60,9 @@ demo-02/
 └── vite.config.ts
 ```
 
-## 6. Tutoriaali
+## 4. Tutoriaali
 
-### 6.1 Tehtävän tietomalli ja alkutila
+### 4.1 Tehtävän tietomalli ja alkutila
 
 Komponentin tila laajenee tässä demossa yksittäisestä merkkijonosta olioiden taulukoksi, joten olion muoto määritellään ensin TypeScriptin **rajapinnalla** (interface). Rajapinta kertoo, mitä kenttiä oliolla on ja minkä tyyppisiä ne ovat, ilman että se itsessään tuottaa suoritettavaa koodia. TypeScriptin kääntäjä käyttää rajapintaa tarkistaakseen, että jokainen `Tehtava`-tyyppinen olio sisältää kentät `id`, `nimi` ja `tehty` oikeilla tyypeillä.
 
@@ -108,7 +108,7 @@ Demon `App.css` sisältää tehtävälistan, tekstikentän ja painikkeen omat ty
 > [!NOTE]
 > `crypto.randomUUID()` on selaimen oma toiminto, joka luo satunnaisen, uniikin merkkijonotunnisteen. Sitä käytetään tässä jokaisen tehtävän yksilöivänä `id`-arvona.
 
-### 6.2 Uuden tehtävän lisääminen
+### 4.2 Uuden tehtävän lisääminen
 
 Tekstikentän arvo voidaan lukea `useRef`-hookilla suoraan DOM-elementistä sen sijaan, että se tallennettaisiin tilaan jokaisen näppäinpainalluksen yhteydessä, kuten demo 1:ssä tehtiin `onChange`-käsittelijällä. `useRef<HTMLInputElement>(null)` luo **viitteen** (ref), jonka `current`-kenttä osoittaa varsinaiseen `<input>`-elementtiin sen jälkeen, kun elementti on liitetty siihen `ref`-propsilla. Viitteen arvon muuttuminen ei aiheuta komponentin uudelleenpiirtoa, joten se sopii tilanteisiin, joissa arvoa tarvitaan vain tietyllä hetkellä, ei jatkuvasti.
 
@@ -197,7 +197,7 @@ Aiheesta lisää: [Reactin dokumentaatio DOM-tapahtumien tyypittämisestä](http
 > [!NOTE]
 > `console.log(e.key)`-rivi ei ole toiminnan kannalta välttämätön. Se on jätetty näkyviin, jotta painetun näppäimen tunnisteen voi tarkistaa selaimen kehittäjätyökalujen konsolista.
 
-### 6.3 Tehtävälistan renderöinti
+### 4.3 Tehtävälistan renderöinti
 
 Tehtävät renderöidään listaksi `tehtavat.map()`-kutsulla, joka muodostaa `Tehtava`-taulukosta vastaavan `<li>`-elementtien listan. `map()`-metodi palauttaa aina uuden taulukon, jonka jokainen alkio on muodostettu alkuperäisen taulukon vastaavasta alkiosta annetulla funktiolla.
 
@@ -286,7 +286,7 @@ const App = () => {
 export default App;
 ```
 
-### 6.4 Tehtävän merkitseminen tehdyksi
+### 4.4 Tehtävän merkitseminen tehdyksi
 
 Tehtävän merkitseminen tehdyksi toimii samalla periaatteella kuin uuden tehtävän lisääminen. `merkitseTehdyksi`-funktio päivittää tilan funktiomuotoisesti, mutta tällä kertaa `edelliset.map()`-kutsulla. Jokainen taulukon alkio käydään läpi, ja se tehtävä, jonka `id` täsmää annettuun tunnisteeseen, korvataan uudella oliolla, jossa `tehty`-kenttä on käännetty vastakkaiseksi (`!tehtava.tehty`). Uusi olio muodostetaan levitysoperaattorilla (`{ ...tehtava, tehty: !tehtava.tehty }`), jolloin muut kentät pysyvät ennallaan ja vain `tehty` muuttuu. Muut alkiot palautetaan sellaisenaan.
 
@@ -395,7 +395,7 @@ export default App;
 
 Funktio kutsutaan `<li>`-elementin `onClick`-käsittelijästä, jolloin tehtävän tekstin klikkaaminen vaihtaa sen tilan. Näytettävä sisältö riippuu `tehty`-kentän arvosta. Valmis tehtävä näytetään `<del>`-elementin sisällä yliviivattuna, muu tehtävä normaalina tekstinä.
 
-## 7. Projektin rakenne lopussa
+## 5. Projektin rakenne lopussa
 
 ```text
 demo-02/
@@ -417,7 +417,7 @@ demo-02/
 └── vite.config.ts
 ```
 
-## 8. Yhteenveto
+## 6. Yhteenveto
 
 Tässä demossa käytiin läpi:
 
@@ -430,7 +430,7 @@ Tässä demossa käytiin läpi:
 
 ---
 
-## 10. Jatka harjoittelua
+## 7. Jatka harjoittelua
 
 - Lisää painike, joka poistaa tehtävän listalta. Käytä `filter()`-metodia palauttamaan taulukko, josta poistettava tehtävä on jätetty pois.
 - Estä tyhjän tai pelkkiä välilyöntejä sisältävän tehtävän lisääminen. Merkkijonon reunojen tyhjän tilan voi poistaa `trim()`-metodilla ennen tarkistusta.

@@ -25,7 +25,7 @@ git config --global user.email "github-tilin@sahkoposti.fi"
 
 ---
 
-## 1. Demojen kloonaaminen ja käyttäminen
+## Demojen kloonaaminen ja käyttäminen
 
 ### Vaihe 1: Repositorion kloonaaminen
 
