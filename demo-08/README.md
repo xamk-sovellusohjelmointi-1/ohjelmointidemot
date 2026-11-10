@@ -203,12 +203,7 @@ Efekti suoritetaan ensimmäisen renderöinnin jälkeen ja sen jälkeen aina, kun
 
 Tallennettua arvoa voi tarkastella selaimen kehittäjätyökaluissa, jotka avataan `F12`-näppäimellä. Chromessa ja Edgessä tallennustila löytyy välilehdeltä "Application" ja Firefoxissa välilehdeltä "Storage" kohdasta "Local Storage" → `http://localhost:3008`. Kun sovellukseen lisätään tehtävä, avaimen `tehtavalista` arvo päivittyy. Saman näkymän kautta arvon voi myös poistaa.
 
-> ⚠️ **FACT-CHECK:** Kehittäjätyökalujen välilehtien nimiä ("Application", "Storage", "Local Storage") ei voi tarkistaa koodista, ja ne voivat vaihdella selainversion ja kieliasetuksen mukaan. Tarkista nykyisillä Chrome-, Edge- ja Firefox-versioilla.
-
 Tässä vaiheessa sivun päivittäminen kadottaa vielä lisätyt tehtävät. Tila alkaa jälleen kolmesta esimerkkitehtävästä, ja efekti tallentaa ne ensimmäisen renderöinnin jälkeen aiemmin tallennettujen tehtävien päälle. Tallennettujen tehtävien lukeminen lisätään seuraavassa vaiheessa.
-
-> [!NOTE]
-> Kehitystilassa `StrictMode` suorittaa efektin käynnistyksen yhteydessä kaksi kertaa. Se ei haittaa tässä, koska molemmat suorituskerrat tallentavat saman arvon.
 
 > [!NOTE]
 > Tallennustila on erillinen jokaiselle **alkuperälle** (origin), joka muodostuu protokollasta, palvelimen nimestä ja portista. Osoitteet `http://localhost:3006` ja `http://localhost:3008` ovat eri alkuperiä, joten demojen tallennetut tiedot pysyvät erillään.
@@ -217,9 +212,9 @@ Aiheesta lisää: [MDN:n `localStorage`-dokumentaatio](https://developer.mozilla
 
 ### 4.3 Tehtävien lukeminen käynnistyksessä
 
-Tallennetut tehtävät täytyy lukea tilaan ennen kuin efekti ehtii tallentaa mitään. Siksi lukeminen tehdään tilan alkuarvossa. `useState` hyväksyy alkuarvoksi myös funktion, jota kutsutaan **alkuarvofunktioksi** (initializer function). React kutsuu alkuarvofunktiota vain komponentin ensimmäisellä renderöinnillä ja käyttää sen paluuarvoa tilan alkuarvona.
+Tallennetut tehtävät täytyy lukea tilaan ennen kuin efekti ehtii tallentaa mitään. Siksi lukeminen tehdään tilan alkuarvossa. `useState` hyväksyy alkuarvoksi myös funktion (initializer function). React kutsuu funktiota vain komponentin ensimmäisellä renderöinnillä ja käyttää sen paluuarvoa tilan alkuarvona.
 
-Tiedostossa `src/App.tsx` kolmen esimerkkitehtävän taulukko korvataan alkuarvofunktiolla:
+Tiedostossa `src/App.tsx` kolmen esimerkkitehtävän taulukko korvataan funktiolla:
 
 ```tsx
 const App = () => {
@@ -282,18 +277,18 @@ const App = () => {
 // ... muu tiedosto ennallaan
 ```
 
-Alkuarvofunktio lukee avaimen `"tehtavalista"` arvon. Ehdollinen lauseke tarkistaa, löytyikö arvo. Jos löytyi, `JSON.parse` muuntaa merkkijonon takaisin tehtävien taulukoksi. Jos arvoa ei ole, `getItem` palauttaa `null`, ja tila saa alkuarvoksi tyhjän taulukon. Näin käy sovelluksen ensimmäisellä käynnistyskerralla. Esimerkkitehtäviä ei enää tarvita, koska lista koostuu käyttäjän omista tallennetuista tehtävistä.
+Funktio lukee avaimen `"tehtavalista"` arvon. Ehdollinen lauseke tarkistaa, löytyikö arvo. Jos löytyi, `JSON.parse` muuntaa merkkijonon takaisin tehtävien taulukoksi. Jos arvoa ei ole, `getItem` palauttaa `null`, ja tila saa alkuarvoksi tyhjän taulukon. Näin käy sovelluksen ensimmäisellä käynnistyskerralla. Esimerkkitehtäviä ei enää tarvita, koska lista koostuu käyttäjän omista tallennetuista tehtävistä.
 
-Alkuarvofunktio annetaan `useState`-hookille funktiona eikä funktion paluuarvona. Komponentti renderöidään uudelleen jokaisen tilamuutoksen jälkeen, mutta React kutsuu alkuarvofunktiota vain ensimmäisellä kerralla. Tallennustilaa ei siis lueta turhaan jokaisella renderöinnillä.
+Alustusfunktio annetaan `useState`-hookille funktiona. Komponentti renderöidään uudelleen jokaisen tilamuutoksen jälkeen, mutta React kutsuu alustusfunktiota vain ensimmäisellä kerralla. Tallennustilaa ei siis lueta turhaan jokaisella renderöinnillä.
 
-Lukemista ei tehdä efektissä, koska efekti suoritetaan vasta renderöinnin jälkeen. Lista näkyisi silloin ensin tyhjänä, ja komponentti renderöitäisiin heti uudelleen luetuilla tehtävillä. Alkuarvofunktio antaa tallennetut tehtävät tilaan jo ensimmäistä renderöintiä varten. Siksi tallentava efekti tallentaa ensimmäisellä suorituskerrallaan saman listan, joka juuri luettiin.
+Lukemista ei tehdä efektissä, koska efekti suoritetaan vasta renderöinnin jälkeen. Lista näkyisi silloin ensin tyhjänä, ja komponentti renderöitäisiin heti uudelleen luetuilla tehtävillä. Alustusfunktio antaa tallennetut tehtävät tilaan jo ensimmäistä renderöintiä varten. Siksi tallentava efekti tallentaa ensimmäisellä suorituskerrallaan saman listan, joka juuri luettiin.
 
 Sovelluksen toiminta tarkistetaan lisäämällä muutama tehtävä, merkitsemällä jokin niistä tehdyksi ja päivittämällä sivu `F5`-näppäimellä. Tehtävät ja niiden tehty-tila säilyvät. Demossa 6 tehtävät saivat uudet `id`-arvot jokaisella päivityksellä. Nyt `id`-arvot luetaan tallennustilasta, joten poistonäkymän osoite `/poista/<id>` osoittaa samaan tehtävään myös päivityksen jälkeen.
 
 > [!NOTE]
-> `JSON.parse` palauttaa TypeScriptissä tyypin `any`, joten TypeScript ei tarkista, että tallennettu tieto on oikeasti `Tehtava`-taulukko. Tila saa tyypin `useState<Tehtava[]>`-määrittelystä. Jos tallennustilassa on virheellistä JSON-tekstiä, `JSON.parse` aiheuttaa virheen, eikä sovellus käynnisty. Kehitystilassa `StrictMode` kutsuu myös alkuarvofunktiota kaksi kertaa, mikä ei haittaa, koska funktio vain lukee tallennustilaa.
+> `JSON.parse` palauttaa TypeScriptissä tyypin `any`, joten TypeScript ei tarkista, että tallennettu tieto on oikeasti `Tehtava`-taulukko. Tila saa tyypin `useState<Tehtava[]>`-määrittelystä. Jos tallennustilassa on virheellistä JSON-tekstiä, `JSON.parse` aiheuttaa virheen, eikä sovellus käynnisty.
 
-Aiheesta lisää: [Reactin `useState`-dokumentaatio alkuarvofunktiosta](https://react.dev/reference/react/useState#avoiding-recreating-the-initial-state).
+Aiheesta lisää: [Reactin `useState`-dokumentaatio alkuarvosta](https://react.dev/reference/react/useState#avoiding-recreating-the-initial-state).
 
 ## 5. Projektin rakenne lopussa
 
@@ -327,11 +322,10 @@ demo-08/
 
 Tässä demossa käytiin läpi:
 
-- Valmiin projektin kopioiminen uuden demon pohjaksi ja sen nimen ja portin muuttaminen
 - Merkkijonon tallentaminen selaimen tallennustilaan `localStorage.setItem`-metodilla ja lukeminen `getItem`-metodilla
 - Taulukon muuntaminen JSON-merkkijonoksi ja takaisin `JSON.stringify`- ja `JSON.parse`-metodeilla
 - Tilan tallentaminen `useEffect`-hookilla aina, kun tila muuttuu
-- Tallennettujen tietojen lukeminen tilaan `useState`-hookin alkuarvofunktiolla, ja
+- Tallennettujen tietojen lukeminen tilaan `useState`-hookin alustusfunktiolla, ja
 - Tallennustilan sisällön tarkasteleminen selaimen kehittäjätyökaluissa.
 
 ---
@@ -339,5 +333,5 @@ Tässä demossa käytiin läpi:
 ## 7. Jatka harjoittelua
 
 - Lisää aloitusnäkymään painike "Tyhjennä lista", joka poistaa kaikki tehtävät. `App`-komponenttiin riittää uusi funktio, joka asettaa tilaksi tyhjän taulukon. `localStorage`-kutsua ei tarvita, koska efekti tallentaa muuttuneen tilan.
-- Kirjoita kehittäjätyökaluissa avaimen `tehtavalista` arvoksi virheellistä JSON-tekstiä, esimerkiksi `abc`, ja päivitä sivu. Korjaa alkuarvofunktio niin, että se palauttaa tyhjän taulukon, jos `JSON.parse` aiheuttaa virheen. JavaScriptin `try...catch` toimii kuten Pythonin `try...except`.
-- Näytä alkuarvofunktiossa demon 6 kolme esimerkkitehtävää, jos tallennustilassa ei ole vielä mitään. Ehdollisen lausekkeen jälkimmäiseksi vaihtoehdoksi tyhjän taulukon tilalle käy sama taulukko, joka oli tilan alkuarvona luvussa 4.2.
+- Kirjoita kehittäjätyökaluissa avaimen `tehtavalista` arvoksi virheellistä JSON-tekstiä, esimerkiksi `abc`, ja päivitä sivu. Korjaa alustusfunktio niin, että se palauttaa tyhjän taulukon, jos `JSON.parse` aiheuttaa virheen.
+- Näytä alustusfunktiossa demon 6 kolme esimerkkitehtävää, jos tallennustilassa ei ole vielä mitään. Ehdollisen lausekkeen jälkimmäiseksi vaihtoehdoksi tyhjän taulukon tilalle käy sama taulukko, joka oli tilan alkuarvona luvussa 4.2.
