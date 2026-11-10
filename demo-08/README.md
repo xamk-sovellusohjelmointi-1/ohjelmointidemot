@@ -17,7 +17,6 @@
 
 Tässä demossa jatketaan demon 6 tehtävälistasovellusta. Demossa 6 tehtävät olivat olemassa vain selaimen muistissa, joten sivun päivittäminen palautti listan alkutilaansa. Tässä demossa tehtävälista tallennetaan selaimen tallennustilaan aina, kun se muuttuu, ja luetaan sieltä sovelluksen käynnistyessä. Tehtävät säilyvät siksi, vaikka sivu päivitetään tai selain suljetaan. Kaikki muutokset tehdään `App`-komponenttiin. Demo kattaa seuraavat tekniikat:
 
-- Valmiin projektin kopioiminen uuden demon pohjaksi ja projektikohtaisten asetusten muuttaminen
 - Merkkijonon tallentaminen selaimen `localStorage`-tallennustilaan `setItem`-metodilla ja lukeminen `getItem`-metodilla
 - Taulukon muuntaminen JSON-merkkijonoksi `JSON.stringify`-metodilla ja takaisin taulukoksi `JSON.parse`-metodilla
 - Tilan tallentaminen Reactin ulkopuolelle `useEffect`-hookilla aina, kun tila muuttuu
@@ -122,7 +121,7 @@ const arvo = localStorage.getItem("tervehdys");
 
 Jos avainta ei ole tallennettu, `getItem` palauttaa `null`. TypeScript tyypittää paluuarvon siksi muotoon `string | null`.
 
-Tehtävälista on taulukko, jossa on olioita, joten sitä ei voi tallentaa sellaisenaan. Taulukko muunnetaan ensin merkkijonoksi **JSON-muotoon** (JavaScript Object Notation). JSON on tekstimuoto, joka näyttää lähes samalta kuin JavaScriptin taulukko- ja oliomerkintä. `JSON.stringify` muuntaa taulukon tai olion JSON-merkkijonoksi, ja `JSON.parse` muuntaa JSON-merkkijonon takaisin taulukoksi tai olioksi. Ne vastaavat Pythonin `json.dumps`- ja `json.loads`-funktioita. Esimerkiksi yhden tehtävän taulukosta tulee merkkijono `[{"id":"3f2a...","nimi":"Siivoa","tehty":false}]`.
+Tehtävälista on taulukko, jossa on olioita, joten sitä ei voi tallentaa sellaisenaan. Taulukko muunnetaan ensin merkkijonoksi **JSON-muotoon** (JavaScript Object Notation). JSON on tekstimuoto, joka näyttää lähes samalta kuin JavaScriptin taulukko- ja oliomerkintä. `JSON.stringify` muuntaa taulukon tai olion JSON-merkkijonoksi, ja `JSON.parse` muuntaa JSON-merkkijonon takaisin taulukoksi tai olioksi. Esimerkiksi yhden tehtävän taulukosta tulee merkkijono `[{"id":"3f2a...","nimi":"Siivoa","tehty":false}]`.
 
 Lista tallennetaan aina, kun se muuttuu. Tallennuskutsu voitaisiin kirjoittaa jokaiseen kolmeen tilaa muuttavaan funktioon, mutta silloin jokainen uusi funktio pitäisi muistaa täydentää samalla tavalla. Sen sijaan tallennus tehdään demosta 4 tutulla `useEffect`-hookilla, jonka riippuvuustaulukossa on `tehtavat`. Demossa 4 todettiin, että efektit on tarkoitettu ensisijaisesti synkronointiin Reactin ulkopuolisten järjestelmien kanssa. Selaimen tallennustila on tällainen järjestelmä. Efekti pitää sen sisällön samana kuin `tehtavat`-tilan.
 
